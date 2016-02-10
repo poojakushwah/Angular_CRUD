@@ -1,4 +1,32 @@
-<h1>Hello from Hero</h1>
-<ul>
-	<li ng-repeat="hero in data">{{ hero.title }}</li>
-</ul>
+
+<label>Title:<input ng-model="ht" type="text"/></label><br/>
+<label>photo:<input ng-model="hp" type="text"/></label><br/>
+<label>city:<input ng-model="hc" type="text"/></label><br/>
+<label>power:<input ng-model="hpo" type="range" min="1" max="10"/></label><br/>
+
+<button ng-click="addHero()">Add Hero</button>
+<input type="text" ng-model="filterData"/>
+<table border="1" cellpadding="10">
+	<tr>
+		<th ng-click="fun('id')">Index</th>
+		<th ng-click="fun('title')">Title</th>
+		<th ng-click="fun('photo')">Photo</th>
+		<th ng-click="fun('city')">City</th>
+		<th ng-click="fun('power')">Power</th>
+		<th ng-click="fun('movies')">Movies Total</th>
+	</tr>
+	<tr ng-repeat="hero in data.heros | filter: {title : filterData} | orderBy : sortOrder : rev" ng-class-odd="'oddd'" ng-class-even="'evd'">
+		<th>{{hero.id }}</th>
+		<th>{{hero.title }}</th>
+		<th><img ng-src="{{ hero.photo }}" width="50" align="absmiddle"/></th>
+		<th>{{hero.city}}</th>
+		<th><input type="range" min="1" max="10" ng-model="hero.power"/></th>
+		<th><a href="#/movies/{{hero.id}}">Total Movies {{ hero.movieslist.length }}</a></th>
+	</tr>
+</table>
+<h1>{{message}}</h1>
+<h1>{{version}}</h1>
+
+<h1>{{constMessage}}</h1>
+<h1>{{consVersion}}</h1>
+

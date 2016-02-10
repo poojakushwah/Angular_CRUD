@@ -1,4 +1,24 @@
-<h1>Hello from Hero</h1>
-<ul>
-	<li ng-repeat="movie in movies">{{ movie.title }}</li>
-</ul>
+<h1>{{selectedHero}}</h1>
+<div>
+	<label>Title:<input type="text" ng-model="mt"/></label><br/>
+	<label>Poster:<input type="text" ng-model="mp"/></label><br/>
+	<button ng-click="addMovies()">Add Movies</button>
+</div>
+<table border="1" cellpadding="5">
+	<tr>
+		<th>Index</th>
+		<th>Title</th>
+		<th>poster</th>
+	
+	</tr>
+	<tr ng-repeat="movie in movies">
+		<th>{{movie.sl }}</th>
+		<th>{{movie.title }}</th>
+		<th><img ng-src="{{ movie.poster }}" width="50" align="absmiddle"/></th>
+	</tr>
+</table>
+<a href="#/">Home</a>
+<h1>{{message}}</h1>
+<h1>{{version}}</h1>
+<h1>{{constMessage}}</h1>
+<h1>{{consVersion}}</h1>

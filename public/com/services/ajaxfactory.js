@@ -1,7 +1,7 @@
 ( function() {
-		angular.module("app").factory(function($http){
+		angular.module("app").factory("ajaxfactory",function($http){
 		return{
-			ajax:$http.get("/heros")
+			ajax:$http.get("/heros")	
 		}
 		})
 		

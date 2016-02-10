@@ -1,11 +1,11 @@
-/**
- * @author SachinYe
- */
 var express=require("express");
 var bp=require("body-parser");
+var fs=require("fs");
 var app=express();
 app.use(express.static(__dirname+"/public"));
-var data={
+app.use(express.static(__dirname));
+app.use(bp.json());
+/*var data={
 	 "heros":[
     {
         "id": 1,
@@ -124,12 +124,49 @@ var data={
     }
 ]
 	
-};
+};*/
 app.get("/",function(req,res){
 	res.send();
 });
 app.get("/heros",function(req,res){
+	fs.readFile("data/heros.json",function(error,data){
+		res.json(data);
+	});
+});
+app.post("/heros",function(req,res){
+var hero2=null;
+	fs.readFile("data/heros.json",function(error,data){
+		hero2=JSON.parse(data);
+		hero2.heros.push(req.body);
+		fs.writeFile("data/heros.json",JSON.stringify(hero2),function(){
+			console.log("file updated");
+			res.json(hero2);
+		});
+	});	
+});
+/*app.post("/heros",function(req,res){
+	console.log("some one is sending res"+res+"req---"+res.body);
+	data.heros.push(req.body);
 	res.send(data);
+	console.log(data);
+	
+});*/
+app.put("/movies/:id",function(req,res){
+	/*console.log(req.body);
+	data.heros[req.params.id-1].movieslist.push(req.body);
+	res.send(data);*/
+	var id=req.params.id;
+	var hero1=null;
+	fs.readFile("data/heros.json",function(error,data){
+		hero1=JSON.parse(data);
+		console.log(req.params.id-1);
+		hero1.heros[req.params.id-1].movieslist.push(req.body);
+		fs.writeFile("data/heros.json",JSON.stringify(hero1),function(){
+			res.json(hero1);
+		});
+	});	
+	
+
 });
 app.listen(1234);
 console.log("Server is running");
